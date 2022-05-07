@@ -3,7 +3,7 @@ class Professeur  extends User{
     private string $grade;
 
   
-    public function insert()
+   /* public function insert()
     {
         $sql="INSERT into Professeurs (grade) value({this->grade}";
     }
@@ -14,15 +14,15 @@ class Professeur  extends User{
     
     public static function selectAll()
     {
-        $sql="SELECT * form Professeurs";
+        $sql="SELECT * from Professeurs";
     }
     public static function delete(int $id)
     {
-        $sql="DELETE form Professeurs where id={$id}";
+        $sql="DELETE from Professeurs where id={$id}";
     }
     public static function selectById(int $id){
         $sql="SELECT * form Professeurs where id={$id}";
-    } 
+    } */
 
   
   

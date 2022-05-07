@@ -1,5 +1,5 @@
 <?php
-
+//  class AC extends User implement Imodel {}
 class AC extends User{
  
 //AP herite de User
