@@ -1,74 +1,79 @@
-<?php 
-class Adresse{
-    private int $id;
-    private string $ville;
-    private string $quartier;
+<?php
+ namespace App\Models;
 
-    //OneToOne  avec Professeur
-    public function professeur():Professeur{
-        return new Professeur;
-    }
+use App\Core\Model;
 
-    public function etudiant():Etudiant{
-        return new Etudiant;
-    }
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
-    {
-        return $this->id;
-    }
+class Adresse extends Model{
+       private int $id;
+       private string $quartier;
+       private string $ville;
 
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */ 
-    public function setId($id)
-    {
-        $this->id = $id;
+       //Association => fonction
+       //OneToOne avec Professeur
+       //Un Objet de type Adresse contient un objet de type Professeur
+       public function professeur():Professeur{
+           return new Professeur();
+       }
+       public function etudiant():Etudiant{
+              return new Etudiant;
+       }
+       /**
+        * Get the value of id
+        */ 
+       public function getId()
+       {
+              return $this->id;
+       }
 
-        return $this;
-    }
+       /**
+        * Set the value of id
+        *
+        * @return  self
+        */ 
+       public function setId($id)
+       {
+              $this->id = $id;
 
-    /**
-     * Get the value of ville
-     */ 
-    public function getVille()
-    {
-        return $this->ville;
-    }
+              return $this;
+       }
 
-    /**
-     * Set the value of ville
-     *
-     * @return  self
-     */ 
-    public function setVille($ville)
-    {
-        $this->ville = $ville;
+       /**
+        * Get the value of quartier
+        */ 
+       public function getQuartier()
+       {
+              return $this->quartier;
+       }
 
-        return $this;
-    }
+       /**
+        * Set the value of quartier
+        *
+        * @return  self
+        */ 
+       public function setQuartier($quartier)
+       {
+              $this->quartier = $quartier;
 
-    /**
-     * Get the value of quartier
-     */ 
-    public function getQuartier()
-    {
-        return $this->quartier;
-    }
+              return $this;
+       }
 
-    /**
-     * Set the value of quartier
-     *
-     * @return  self
-     */ 
-    public function setQuartier($quartier)
-    {
-        $this->quartier = $quartier;
+       /**
+        * Get the value of ville
+        */ 
+       public function getVille()
+       {
+              return $this->ville;
+       }
 
-        return $this;
-    }
+       /**
+        * Set the value of ville
+        *
+        * @return  self
+        */ 
+       public function setVille($ville)
+       {
+              $this->ville = $ville;
+
+              return $this;
+       }
 }

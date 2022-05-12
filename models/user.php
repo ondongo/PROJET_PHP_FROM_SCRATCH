@@ -1,121 +1,90 @@
-<?php
-//Classe Concrete lorsqu'elle est instanciable 
-//Classe Abstraire lorsqu'elle n'est pas instanciable 
-//Classe final => sterile lorsqu'elle 
-  //ne participe pas dans hierarchie heritage
-//class User implements Imodel
-class User{
-    protected int $id;
-    protected string $login;
-    protected string $password;
-    protected string $role;
-    /*protected static $table="users";
+<?php 
 
-    public function insert()
-    {
-        $sql="INSERT into {$this->table} (login,password) value({this->login},{this->password})";
-    }
-    public function update()
-    {
-        $sql="UPDATE  {$this->table} set login={this->login},password={this->password} where id={this->id}";
-    }
-    
-    public static function selectAll()
-    {
-        $sql="SELECT * from {self::table}";//from users
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE from {self::table} where id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * from {self::table} where id={$id}";}*/
-    
-    //constructeur
+ namespace App\Models;
+ use App\Core\Model;
+class User extends Model{
+    //Attributs 
+     protected int   $id;
+     protected string $login;
+     protected string $password;
+     protected string $role;
+
+    //Methodes
+    //Constructeur
     public function __construct()
     {
-
+       self::$table="user" ;
+    }
+    //Getters => Obtenir la valeur d'un attribut private ou protected
+                //a partir de l'interface de la classe
+    public function getId():int{
+       return $this->id;
     }
 
-    /**
-     * Get the value of login
-     */ 
-    public function getLogin()
-    {
-        return $this->login;
+    //Setters=> Modifie la valeur d'un attribut private ou protected
+                //a partir de l'interface de la classe
+    public function setId(int $id ):void{
+               $this->id=$id;   
     }
+    
 
-    /**
-     * Set the value of login
-     *
-     * @return  self
-     */ 
-    public function setLogin($login)
-    {
-        $this->login = $login;
+     /**
+      * Get the value of login
+      */ 
+     public function getLogin()
+     {
+          return $this->login;
+     }
 
-        return $this;
-    }
+     /**
+      * Set the value of login
+      *
+      * @return  self
+      */ 
+     public function setLogin($login)
+     {
+          $this->login = $login;
 
-    /**
-     * Get the value of password
-     */ 
-    public function getPassword()
-    {
-        return $this->password;
-    }
+          return $this;
+     }
 
-    /**
-     * Set the value of password
-     *
-     * @return  self
-     */ 
-    public function setPassword($password)
-    {
-        $this->password = $password;
+     /**
+      * Get the value of password
+      */ 
+     public function getPassword()
+     {
+          return $this->password;
+     }
 
-        return $this;
-    }
+     /**
+      * Set the value of password
+      *
+      * @return  self
+      */ 
+     public function setPassword($password)
+     {
+          $this->password = $password;
 
-    /**
-     * Get the value of id
-     */ 
-    public function getId()
-    {
-        return $this->id;
-    }
+          return $this;
+     }
 
-    /**
-     * Set the value of id
-     *
-     * @return  self
-     */ 
-    public function setId($id)
-    {
-        $this->id = $id;
+     /**
+      * Get the value of role
+      */ 
+     public function getRole()
+     {
+          return $this->role;
+     }
 
-        return $this;
-    }
+     /**
+      * Set the value of role
+      *
+      * @return  self
+      */ 
+     public function setRole($role)
+     {
+          $this->role = $role;
 
-    /**
-     * Get the value of role
-     */ 
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * Set the value of role
-     *
-     * @return  self
-     */ 
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
+          return $this;
+     }
 }
-
-?>

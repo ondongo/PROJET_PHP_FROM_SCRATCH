@@ -1,46 +1,33 @@
 <?php
 //  class Inscription implement Imodel {}
-class Inscription {
+namespace App\Models;
+use App\Core\Model;
+class Inscription extends Model {
     private string $id;
-    private DateTime $dateIns;
+    private string $dateIns;
     private string $annee;
 
+    public function __construct()
+    {
+        self::$table='inscription' ;
+    }
+    //ManyToOne => AC
+   public function ac():AC{
+       $sql="select u.* from inscription i,user 
+                      u where  u.id=i.ac_id
+                      and u.role like 'ROLE_AC'
+                      and i.id=".$this->id ;
 
-   /* public function insert()
-    {
-        $sql="INSERT into Inscription(dateIns,annee) value({this->dateIns},{this->annee})";
-    }
-    public function update()
-    {
-        $sql="UPDATE  Inscription set dateIns={this->dateIns},annee={this->annee} where id={this->id}";
-    }
-    
-    public static function selectAll()
-    {
-        $sql="SELECT * form inscription";
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE form Inscriptionwhere id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * form Inscription where id={$id}";
-    } */
-
+       return new AC() ;
+   }
     // many to one avec Classe
     public function classe():Classe{
-        //$sql="SELECT c.* form Inscription i,classe c where c.id=i.classe_id and i.id={$this->id}";
+        $sql="SELECT c.* form Inscription i,classe c where c.id=i.classe_id and i.id={$this->id}";
         return new Classe(); 
     } 
     // many to one avec Etudiant
     public function etudiant():Etudiant{
-
-
-
-
-
-
-        //$sql="SELECT e.* form Inscription i,etudiant e where e.id=i.etudiant and  i.id={$this->id}";
+        $sql="SELECT e.* form Inscription i,etudiant e where e.id=i.etudiant and  i.id={$this->id}";
         return new Etudiant(); 
     } 
     /**     * Get the value of dateIns

@@ -1,4 +1,5 @@
 <?php
+namespace App\Models;
 //  class AC extends User implement Imodel {}
 class AC extends User{
  

@@ -1,128 +1,48 @@
-<?php
-//class Cours implements Imodel
-class Cours {
-    public $id;
-    private DateTime $dateCours;
-    private string  $heureD;
-    private string  $heureF;
-    private int  $annee;
+<?php 
+ namespace App\Models;
 
-    /*public function insert()
-    {
-        $sql="INSERT into cours(dateCours,heureD,heureF) value({this->dateCours},{this->heureD},{this->heureF},{this->annee})";
-    }
-    public function update()
-    {
-        $sql="UPDATE  cours set dateCours={this->dateCours},heureD={this->heureD},heureF={this->heureF},annee={this->annee} where id={this->id}";
-    }
-    
-    public static function selectAll()
-    {
-        $sql="SELECT * form cours";
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE form cours where id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * form cours where id={$id}";
-    }*/
+use App\Core\Model;
 
-    // Attributs navigationnels
-    // many to one avec Classe
-    public function classe():Classe{
-        return new Classe(); 
-    }
-  
-    //ManyToOne =>Professeur
-    public function professeur():Professeur{
-        return new Professeur();
-     }
-     //ManyToOne =>Module
-    public function module():Module{
-        return new Module();
-     }
-    /**
-     * Get the value of heureD
-     */ 
-    public function getHeureD()
+class Cours extends Model{
+    private int $id;
+    //Classe Php \ nameSpace Racine
+    private \DateTime $dateCours;
+    private string $heureDebut;
+    private string $heureFin;
+
+
+    public function __construct()
     {
-        return $this->heureD;
-    }
-
-    /**
-     * Set the value of heureD
-     *
-     * @return  self
-     */ 
-    public function setHeureD($heureD)
-    {
-        $this->heureD = $heureD;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of heureF
-     */ 
-    public function getHeureF()
-    {
-        return $this->heureF;
-    }
-
-    /**
-     * Set the value of heureF
-     *
-     * @return  self
-     */ 
-    public function setHeureF($heureF)
-    {
-        $this->heureF = $heureF;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of annee
-     */ 
-    public function getAnnee()
-    {
-        return $this->annee;
-    }
-
-    /**
-     * Set the value of annee
-     *
-     * @return  self
-     */ 
-    public function setAnnee($annee)
-    {
-        $this->annee = $annee;
-
-        return $this;
+        self::$table="cours";
     }
 
 
-    /**
-     * Get the value of dateCours
-     */ 
-    public function getDateCours()
-    {
-        return $this->dateCours;
-    }
+    //Association
+     //ManyToOne avec Module
+        //un Objet de type Cours contient un objet de type Module
+        //Plusieurs Objet de type Cours sont associes a un objet de type Module
+        public function module():Module{
+            $sql="select m.* from cours c, 
+                  module m where c.module_id=m.id and c.id={$this->id}";
 
-    /**
-     * Set the value of dateCours
-     *
-     * @return  self
-     */ 
-    public function setDateCours($dateCours)
-    {
-        $this->dateCours = $dateCours;
+            return new Module();
+        }
+      //ManyToOne avec Professeur
+        //un Objet de type Cours contient un objet de type Professeur
+        //Plusieurs Objet de type Cours sont associes a un objet de type Professeur
 
-        return $this;
-    } 
-
+        public function professeur():Professeur{
+            $sql="select u.* from cours c, 
+                  user u where c.professeur_id=u.id and c.id={$this->id} 
+                  and role like 'ROLE_PROFESSEUR ";
+            return new Professeur();
+        }
+       //ManyToOne avec Classe
+         //un Objet de type Cours contient un objet de type Classe
+        //Plusieurs Objet de type Cours sont associes a un objet de type Classe
+        public function classe():Classe{
+            return new Classe();
+        }
     /**
      * Get the value of id
      */ 
@@ -142,6 +62,64 @@ class Cours {
 
         return $this;
     }
-}
 
-?>
+    /**
+     * Get the value of dateCours
+     */ 
+    public function getDateCours()
+    {
+        return $this->dateCours;
+    }
+
+    /**
+     * Set the value of dateCours
+     *
+     * @return  self
+     */ 
+    public function setDateCours($dateCours)
+    {
+        $this->dateCours = $dateCours;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of heureDebut
+     */ 
+    public function getHeureDebut()
+    {
+        return $this->heureDebut;
+    }
+
+    /**
+     * Set the value of heureDebut
+     *
+     * @return  self
+     */ 
+    public function setHeureDebut($heureDebut)
+    {
+        $this->heureDebut = $heureDebut;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of heureFin
+     */ 
+    public function getHeureFin()
+    {
+        return $this->heureFin;
+    }
+
+    /**
+     * Set the value of heureFin
+     *
+     * @return  self
+     */ 
+    public function setHeureFin($heureFin)
+    {
+        $this->heureFin = $heureFin;
+
+        return $this;
+    }
+}

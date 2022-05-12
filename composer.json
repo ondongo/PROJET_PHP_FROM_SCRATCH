@@ -1,0 +1,17 @@
+{
+    "name": "mac/poo_cdsd",
+    "autoload": {
+        "psr-4": {
+            "App\\Models\\": "models/",
+            "App\\Core\\": "core/",
+            "App\\Controllers\\": "controllers/"
+        }
+    },
+    "authors": [
+        {
+            "name": "viziodev",
+            "email": "viziodev03@gmail.com"
+        }
+    ],
+    "require": {}
+}

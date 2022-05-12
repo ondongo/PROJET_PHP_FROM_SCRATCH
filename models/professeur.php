@@ -1,81 +1,38 @@
 <?php 
-class Professeur  extends User{
-    private string $grade;
-
-  
-   /* public function insert()
-    {
-        $sql="INSERT into Professeurs (grade) value({this->grade}";
-    }
-    public function update()
-    {
-        $sql="UPDATE  Professeurrs set grade={this->grade} where id={this->id}";
-    }
+ namespace App\Models;
+class Professeur extends User{
+     private string $grade;   // V.7 private $grade;
     
-    public static function selectAll()
-    {
-        $sql="SELECT * from Professeurs";
-    }
-    public static function delete(int $id)
-    {
-        $sql="DELETE from Professeurs where id={$id}";
-    }
-    public static function selectById(int $id){
-        $sql="SELECT * form Professeurs where id={$id}";
-    } */
 
-  
-  
-    public function __construct()
-    {
-        $this->role="ROLE_PROFESSEUR";
-    }
-     //OneToMany avec Cours
-    //Une Professeur associee a plusieurs cours
-    public function cours():array{
-        return [];
-    }
 
-    //ManyToMany avec Module
-    
-    public function modules():array{
-        return [];
-    }
+     //Association 
+      //OneToOne avec adresse
+          //Un Objet de type Professeur contient un objet de type Adresse
+          public function adresse():Adresse{
+              return new Adresse();
+          }
+      //ManyToMany avec Module
+       //Un Objet de type Professeur plusieurs objets de type Module
+        public function modules():array{
+            return [];
+        }
+     /**
+      * Get the value of grade
+      */ 
+     public function getGrade()
+     {
+          return $this->grade;
+     }
 
-    //OneToOne  avec Adresse
-    public function adresse():Adresse|null{
-        return null;
-    }
-    /**
-     * Get the value of grade
-     */ 
-    public function getGrade()
-    {
-        return $this->grade;
-    }
+     /**
+      * Set the value of grade
+      *
+      * @return  self
+      */ 
+     public function setGrade($grade)
+     {
+          $this->grade = $grade;
 
-    /**
-     * Set the value of grade
-     *
-     * @return  self
-     */ 
-    public function setGrade($grade)
-    {
-        $this->grade = $grade;
-
-        return $this;
-    }
-
-    //Redefinition => evolution
-      //1-Heritage de Methode
-      //2-Redefinir=> changer son comportement
-       /**
-       * Set the value of role
-       *
-       * @return  self
-       */ 
-      public function setRole($role)
-      {
           return $this;
-      }
+     }
 }
