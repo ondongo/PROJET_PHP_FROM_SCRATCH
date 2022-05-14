@@ -1,25 +1,28 @@
-<?php
+<?php 
 namespace App\Models;
-//  class AC extends User implement Imodel {}
-class AC extends User{
- 
-//AP herite de User
-
-   
+class AC extends User {
+    
     public function __construct()
     {
-        $this->role="ROLE_AC";
+        parent::__construct();
+        parent::$role="ROLE_AC";
+        $this->inscriptions=[];
+        
     }
-    //Redefinition => evolution
-      //1-Heritage de Methode
-      //2-Redefinir=> changer son comportement
-       /**
-       * Set the value of role
-       *
-       * @return  self
-       */ 
-       public function setRole($role)
-        {
-            return $this;
-        }
+    public function inscriptions():array{
+        return [];
+        $sql="select u.* from inscription i,user 
+        u where  u.id=i.ac_id
+        and u.role like 'ROLE_AC'
+        and i.id=".$this->id ;
+
+        parent::selectWhere($sql,[$this->id],true);
+    }
+
+    public static  function selectAll(){
+        $sql="select *  from  ".parent::$table." where role like ? ";
+       return parent::database()->executeSelect($sql,[parent::$role]);
+     }
+
+
 }

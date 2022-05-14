@@ -1,5 +1,5 @@
 <?php
- namespace App\Models; 
+namespace App\Models; 
  use App\Core\Model;
 class Classe extends Model{
     private int $id;  
@@ -9,16 +9,16 @@ class Classe extends Model{
 
     public function __construct()
     {
-        self::$table="classe";
+        parent::$table="classe";
     }
 
     //OneToMany avec Cours
        //Un objet de type Classe contient plusieurs objets de type Cours
        public function cours():array{
         $sql="select c.* from cours c, 
-              classe cl where c.classe_id=cl.id and cl.id={$this->id} 
+              classe cl where c.classe_id=cl.id and cl.id=? 
               ";
-
+        parent::selectWhere($sql,[$this->id]);
            return [];
        }
     /**

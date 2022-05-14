@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+
 
 require_once("../vendor/autoload.php");
 
@@ -30,9 +32,26 @@ require_once("../vendor/autoload.php");
         //https://packagist.org/
         //Hub de dependance =>site beaucoup de dependance suivant le langage
 
-use App\Models\Module;
+/* use App\Models\Module;
+use App\Models\RP;
+use App\Core\DataBase;
+use App\Exceptions\BdConnexionException;
+
+
+$rp =new RP(); */
 use App\Models\RP;
 $rp =new RP();
+$rp->setLogin("rp3");
+$rp->setPassword("rp");
+$rp->insert();
+echo "<pre>";
+RP::selectAll();
+var_dump(RP::selectById(1));
+echo "</pre>";
+
+
+  
+    
 
 
 

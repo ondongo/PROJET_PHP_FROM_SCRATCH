@@ -1,19 +1,19 @@
 <?php 
 
- namespace App\Models;
- use App\Core\Model;
-class User extends Model{
+namespace App\Models;
+use App\Core\Model;
+abstract class User extends Model{
     //Attributs 
      protected int   $id;
      protected string $login;
      protected string $password;
-     protected string $role;
+     protected static string $role;
 
     //Methodes
     //Constructeur
     public function __construct()
     {
-       self::$table="user" ;
+       parent::$table="user" ;
     }
     //Getters => Obtenir la valeur d'un attribut private ou protected
                 //a partir de l'interface de la classe
@@ -86,5 +86,15 @@ class User extends Model{
           $this->role = $role;
 
           return $this;
+     }
+
+     public function insert(){
+         
+          //die(parent::$table);
+          $sql="INSERT INTO  ".parent::$table."  (`login`, `password`,  `role`)
+               VALUES ( ?, ?, ?);";
+              
+         return parent::database()->executeUpdate($sql,[
+                                                  $this->login,$this->password,self::$role]);
      }
 }

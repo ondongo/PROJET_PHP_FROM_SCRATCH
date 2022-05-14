@@ -2,42 +2,26 @@
 //  class Inscription implement Imodel {}
 namespace App\Models;
 use App\Core\Model;
-class Inscription extends Model {
+class DemandeInscription extends Model {
     private string $id;
-    private string $dateIns;
+    private string $datedemandeIns;
     private string $annee;
 
     public function __construct()
     {
-        self::$table='inscription' ;
+        self::$table='demandeinscription' ;
     }
     //ManyToOne => AC
-   public function ac():AC{
+   public function etudiant():Etudiant{
        $sql="select u.* from inscription i,user 
                       u where  u.id=i.ac_id
-                      and u.role like 'ROLE_AC'
+                      and u.role like 'ROLE_Etudiant'
                       and i.id=".$this->id ;
 
-       return new AC() ;
+       return new Etudiant();
    }
 
-    public function getDateIns()
-    {
-        return $this->dateIns;
-    }
-
-    /**
-     * Set the value of dateIns
-     *
-     * @return  self
-     */ 
-    public function setDateIns($dateIns)
-    {
-        $this->dateIns = $dateIns;
-
-        return $this;
-    }
-
+   
     /**
      * Get the value of annee
      */ 
@@ -75,6 +59,26 @@ class Inscription extends Model {
     public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of datedemandeIns
+     */ 
+    public function getDatedemandeIns()
+    {
+        return $this->datedemandeIns;
+    }
+
+    /**
+     * Set the value of datedemandeIns
+     *
+     * @return  self
+     */ 
+    public function setDatedemandeIns($datedemandeIns)
+    {
+        $this->datedemandeIns = $datedemandeIns;
 
         return $this;
     }

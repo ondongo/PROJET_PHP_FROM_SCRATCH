@@ -1,24 +1,54 @@
-
 <?php 
-
 namespace App\Models;
-
-class Etudiant extends User{
-    //Attributs
+class Etudiant extends User {
+    private string $nomComplet;
     private string $matricule;
-
     public function __construct()
-    {}
-   
-
-    // one to many avec Inscription
-    public function inscription():array{
+    {
+        parent::__construct();
+        parent::$role="ROLE_Etudiant";
+        $this->adresse=new Adresse;
+    }
+    public function adresse():Adresse{
+        return new Adresse();
+    }
+    public function demandeinscription():array{
         return [];
+      }
+    public static function selectAll(){
+        $sql="select *  from  ".parent::$table." where role like ? ";
+       return parent::database()->executeSelect($sql,[parent::$role]);
+     }
+
+
+    public function insert(){
+       $sql="INSERT INTO ? (`login`,`password`, `matricule`, `ville`, `quartier`, `role`,nom_complet)
+            VALUES (?,?,?,?,?,?,?);";
+       return parent::database()->executeUpdate($sql,[
+                       parent::$table,
+                       $this->login,$this->password,$this->matricule,
+                       $this->adresse->getVille(),  $this->adresse->getQuartier(),
+                       parent::$role,$this->nomComplet]);
+  }
+
+    /**
+     * Get the value of nomComplet
+     */ 
+    public function getNomComplet()
+    {
+         return $this->nomComplet;
     }
 
-    //OneToOne  avec Adresse
-    public function adresse():Adresse|null{
-        return null;
+    /**
+     * Set the value of nomComplet
+     *
+     * @return  self
+     */ 
+    public function setNomComplet($nomComplet)
+    {
+         $this->nomComplet = $nomComplet;
+
+         return $this;
     }
 
     /**
@@ -40,8 +70,4 @@ class Etudiant extends User{
 
         return $this;
     }
- 
-
 }
-
-?>

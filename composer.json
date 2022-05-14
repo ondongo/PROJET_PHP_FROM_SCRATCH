@@ -4,7 +4,8 @@
         "psr-4": {
             "App\\Models\\": "models/",
             "App\\Core\\": "core/",
-            "App\\Controllers\\": "controllers/"
+            "App\\Controllers\\": "controllers/",
+            "App\\Exceptions\\": "exceptions/"
         }
     },
     "authors": [

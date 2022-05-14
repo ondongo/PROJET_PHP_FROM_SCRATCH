@@ -4,6 +4,15 @@ class RP extends User {
     
     public function __construct()
     {
-        $this->role="ROLE_RP";
+        parent::__construct();
+        parent::$role="ROLE_RP";
+        
     }
+
+    public static  function selectAll(){
+        $sql="select *  from  ".parent::$table." where role like ? ";
+       return parent::database()->executeSelect($sql,[parent::$role]);
+     }
+
+
 }

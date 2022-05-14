@@ -1,5 +1,5 @@
 <?php 
- namespace App\Models;
+namespace App\Models;
 
 use App\Core\Model;
 
@@ -13,7 +13,7 @@ class Cours extends Model{
 
     public function __construct()
     {
-        self::$table="cours";
+        parent::$table="cours";
     }
 
 
@@ -23,8 +23,8 @@ class Cours extends Model{
         //Plusieurs Objet de type Cours sont associes a un objet de type Module
         public function module():Module{
             $sql="select m.* from cours c, 
-                  module m where c.module_id=m.id and c.id={$this->id}";
-
+                  module m where c.module_id=m.id and c.id=?";
+                 parent::selectWhere($sql,[$this->id],true);
             return new Module();
         }
       //ManyToOne avec Professeur
@@ -33,8 +33,9 @@ class Cours extends Model{
 
         public function professeur():Professeur{
             $sql="select u.* from cours c, 
-                  user u where c.professeur_id=u.id and c.id={$this->id} 
+                  user u where c.professeur_id=u.id and c.id=? 
                   and role like 'ROLE_PROFESSEUR ";
+                parent::selectWhere($sql,[$this->id],true);
             return new Professeur();
         }
        //ManyToOne avec Classe

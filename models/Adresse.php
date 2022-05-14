@@ -1,9 +1,6 @@
 <?php
- namespace App\Models;
-
-use App\Core\Model;
-
-class Adresse extends Model{
+namespace App\Models;
+class Adresse{
        private int $id;
        private string $quartier;
        private string $ville;
@@ -14,9 +11,7 @@ class Adresse extends Model{
        public function professeur():Professeur{
            return new Professeur();
        }
-       public function etudiant():Etudiant{
-              return new Etudiant;
-       }
+
        /**
         * Get the value of id
         */ 
