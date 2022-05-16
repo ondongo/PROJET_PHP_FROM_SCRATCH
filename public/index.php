@@ -3,7 +3,7 @@
 
 
 require_once("../vendor/autoload.php");
-
+require_once("../core/constantes.php");
 
 
 // Une variable d'une classe
@@ -39,15 +39,21 @@ use App\Exceptions\BdConnexionException;
 
 
 $rp =new RP(); */
-use App\Models\RP;
+/*use App\Models\Rp;
 $rp =new RP();
 $rp->setLogin("rp3");
+
 $rp->setPassword("rp");
 $rp->insert();
-echo "<pre>";
+ech'o "<pre>";
 RP::selectAll();
 var_dump(RP::selectById(1));
-echo "</pre>";
+echo "</pre>";*/
+
+use App\Core\Request;
+
+$request= new Request();
+
 
 
   

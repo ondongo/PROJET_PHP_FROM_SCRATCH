@@ -27,7 +27,7 @@ class DemandeInscription extends Model {
      */ 
     public function getAnnee()
     {
-        return $this->annee;
+    return $this->annee;
     }
 
     /**
