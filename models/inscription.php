@@ -13,17 +13,13 @@ class Inscription extends Model {
     }
     //ManyToOne => AC
    public function ac():AC{
-       $sql="select u.* from inscription i,user 
-                      u where  u.id=i.ac_id
-                      and u.role like 'ROLE_AC'
-                      and i.id=".$this->id ;
-
+       
        return new AC() ;
    }
 
     public function getDateIns()
     {
-        return $this->dateIns;
+        return $this->dateIns;   
     }
 
     /**

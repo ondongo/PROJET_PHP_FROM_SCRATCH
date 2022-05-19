@@ -25,6 +25,7 @@ abstract class Model implements IModel{
             return self::database()->executeUpdate($sql,[$id]);
     }
     public static  function selectAll(){
+        
            $sql="select *  from  ".self::$table;
           return self::database()->executeSelect($sql);
     }

@@ -1,24 +1,18 @@
-<?php
+<?php 
 namespace App\Core;
+class Request {
+    public function getUrl(){
+       return explode("/",$_SERVER['REQUEST_URI']);
+    }
 
-class Request{
-/*/url: localhost:8006/uri
-uri => uniform ressource identifier => controller/use case
+    public function getUri(){
+        return $this->getUrl()[1]; 
+    }
 
-Controller => classe 
-
-            --Ajouter => classe-add
-            --Modifier=>classe-up
-            --lister=> classe
-            --supprimer=> classe-del
-*/
-
-
-
-
-
-
-
-
+    public function isPost():bool{
+        return $_SERVER["REQUEST_METHOD"]=="POST";
+    }
+    public function isGet():bool{
+        return $_SERVER["REQUEST_METHOD"]=="GET";
+    }
 }
-

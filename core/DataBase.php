@@ -12,11 +12,12 @@ class DataBase{
         //host : adresse du server BD
         try {
             //Essaie de te connecter
-            $this->pdo=new \PDO("mysql:dbname=gestion_scolaire_l2;host=localhost:8889","root","root");
+            $this->pdo=new \PDO("mysql:dbname=scolaire_baila;host=127.0.0.1","root","");
         } catch (\Exception $ex) {
               die("Erreur Connexion -Veuillez contacter votre Admin");
               //throw new BdConnexionException;
         }
+
        
     }
 
@@ -40,7 +41,8 @@ class DataBase{
         if($single){
             $result=$stm->fetch();// retourne one ligne
         }else{
-            $result=$stm->fetchAll(); //plusieurs lignes
+            $result=$stm->fetchAll();
+             //plusieurs lignes
         }
         $this->closeConnexion();
         return  $result;

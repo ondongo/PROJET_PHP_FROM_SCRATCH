@@ -13,7 +13,7 @@ class DemandeInscription extends Model {
     }
     //ManyToOne => AC
    public function etudiant():Etudiant{
-       $sql="select u.* from inscription i,user 
+       $sql="select u.* from demandeinscription i,user 
                       u where  u.id=i.ac_id
                       and u.role like 'ROLE_Etudiant'
                       and i.id=".$this->id ;
