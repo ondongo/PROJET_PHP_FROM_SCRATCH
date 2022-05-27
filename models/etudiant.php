@@ -7,7 +7,7 @@ class Etudiant extends User {
     {
         parent::__construct();
         parent::$role="ROLE_Etudiant";
-        $this->adresse=new Adresse;
+        $this->adresse=new Adresse;   //objet adresse
     }
     public function adresse():Adresse{
         return new Adresse();

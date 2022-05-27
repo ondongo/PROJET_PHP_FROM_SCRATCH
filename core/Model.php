@@ -2,7 +2,8 @@
 namespace App\Core;
 abstract class Model implements IModel{
 
-    protected static DataBase|null $database=null;//instance est nulle
+  protected static DataBase|null $database=null;//l'objet n'est pas encore créé null est un type
+
 
     protected static string $table;
 
@@ -15,7 +16,7 @@ abstract class Model implements IModel{
     public static function database():DataBase{
         //Singleton=> Gain de Memoire
         if(self::$database==null){
-            self::$database=new DataBase;
+            self::$database=new DataBase;//construction de l'objet
         }
         return self::$database;
         
@@ -36,5 +37,8 @@ abstract class Model implements IModel{
     public static  function selectWhere(string $sql,array $data=[],$single=false){
         return self::database()->executeSelect($sql,$data,$single);
     }
+    /*principe solid
+    une classe =une responsabilité
 
+*/
 }

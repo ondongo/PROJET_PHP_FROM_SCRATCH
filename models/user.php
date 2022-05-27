@@ -97,4 +97,5 @@ abstract class User extends Model{
          return parent::database()->executeUpdate($sql,[
                                                   $this->login,$this->password,self::$role]);
      }
+     
 }

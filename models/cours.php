@@ -14,7 +14,7 @@ class Cours extends Model{
     public function __construct()
     {
         parent::$table="cours";
-    }
+    }                                                                                                                                                                               
 
 
     //Association
