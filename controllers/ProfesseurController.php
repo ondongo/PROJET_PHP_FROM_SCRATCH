@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Controllers;
+use App\Core\Icontroller;
 
-class ProfesseurController{
+class ProfesseurController implements Icontroller {
 
 
-    public function lister(){
+public function lister(){
     }
     
 public function ajouter(){
@@ -14,9 +16,8 @@ public function ajouter(){
 public function modifier(){
 
 }
-
-public function affectermodule(){
-
+public function supprimer(){
+    
 }
 
 
