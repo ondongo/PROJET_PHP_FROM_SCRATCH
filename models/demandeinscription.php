@@ -9,7 +9,7 @@ class DemandeInscription extends Model {
 
     public function __construct()
     {
-        self::$table='demandeinscription' ;
+        self::table();
     }
     //ManyToOne => AC
    public function etudiant():Etudiant{

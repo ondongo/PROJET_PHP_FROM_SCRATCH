@@ -3,18 +3,19 @@ namespace App\Models;
 
 use App\Core\Model;
 
+
 class Cours extends Model{
     private int $id;
     //Classe Php \ nameSpace Racine
-    private \DateTime $dateCours;
+    private string $dateCours;
     private string $heureDebut;
     private string $heureFin;
 
 
     public function __construct()
     {
-        parent::$table="cours";
-    }                                                                                                                                                                               
+   
+    }
 
 
     //Association
@@ -34,9 +35,8 @@ class Cours extends Model{
         public function professeur():Professeur{
             $sql="select u.* from cours c, 
                   user u where c.professeur_id=u.id and c.id=? 
-                  and role like 'ROLE_PROFESSEUR ";
-                parent::selectWhere($sql,[$this->id],true);
-            return new Professeur();
+                  and roles like 'ROLE_PROFESSEUR' ";
+               return parent::selectWhere($sql,[$this->id],true,Professeur::class);
         }
        //ManyToOne avec Classe
          //un Objet de type Cours contient un objet de type Classe
@@ -69,7 +69,8 @@ class Cours extends Model{
      */ 
     public function getDateCours()
     {
-        return $this->dateCours;
+        $date=new  \DateTime($this->dateCours);
+        return $date->format("d/m/Y");
     }
 
     /**

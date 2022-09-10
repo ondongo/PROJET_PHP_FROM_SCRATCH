@@ -9,7 +9,7 @@ class Classe extends Model{
 
     public function __construct()
     {
-        parent::$table="classe";
+        parent::table();
     }
 
     //OneToMany avec Cours
@@ -17,6 +17,15 @@ class Classe extends Model{
        public function cours():array{
         $sql="select c.* from cours c, 
               classe cl where c.classe_id=cl.id and cl.id=? 
+              ";
+        parent::selectWhere($sql,[$this->id]);
+           return [];
+       }
+
+
+       public function etudiant():array{
+        $sql="select u.* from user u, 
+              classe cl where u.classe_id=cl.id and cl.id=? 
               ";
         parent::selectWhere($sql,[$this->id]);
            return [];
@@ -100,4 +109,15 @@ class Classe extends Model{
 
         return $this;
     }
+
+
+    public function insert(){
+         
+        //die(parent::table());
+        $sql="INSERT INTO  classe (`libelle`, `filiere`, `niveau`) VALUES (?,?,?)";
+            
+       return parent::database()->executeUpdate($sql,[
+                                                $this->libelle,$this->filiere,$this->niveau]);
+        
+   }
 }

@@ -48,14 +48,14 @@ class Professeur extends User{
 
      public static  function selectAll(){
          $sql="select *  from ? where role like ? ";
-         return parent::database()->executeSelect($sql,[parent::$table, parent::$role]);
+         return parent::database()->executeSelect($sql,[parent::table(), parent::$role]);
      }
 
      public function insert(){
-        $sql="INSERT INTO ? (`login`,`password`, `grade`, `ville`, `quartier`, `role`,nom_complet)
+        $sql="INSERT INTO ".parent::table()."(`login`,`password`, `grade`, `ville`, `quartier`, `role`,nom_complet)
              VALUES (?,?,?,?,?,?,?);";
         return parent::database()->executeUpdate($sql,[
-                        parent::$table,
+                        parent::table(),
                         $this->login,$this->password,$this->grade,
                         $this->adresse->getVille(),  $this->adresse->getQuartier(),
                         parent::$role,$this->nomComplet]);
@@ -77,6 +77,26 @@ class Professeur extends User{
      public function setNomComplet($nomComplet)
      {
           $this->nomComplet = $nomComplet;
+
+          return $this;
+     }
+
+     /**
+      * Get the value of adresse
+      */ 
+     public function getAdresse()
+     {
+          return $this->adresse;
+     }
+
+     /**
+      * Set the value of adresse
+      *
+      * @return  self
+      */ 
+     public function setAdresse($adresse)
+     {
+          $this->adresse = $adresse;
 
           return $this;
      }

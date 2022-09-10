@@ -9,7 +9,7 @@ class Inscription extends Model {
 
     public function __construct()
     {
-        self::$table='inscription' ;
+        self::table();
     }
     //ManyToOne => AC
    public function ac():AC{

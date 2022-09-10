@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 use App\Core\Icontroller;
-
-class ProfesseurController implements Icontroller {
+use App\Core\Controller;
+class ProfesseurController extends Controller {
 
 
 public function lister(){
@@ -13,12 +13,12 @@ public function ajouter(){
 
 }
 
-public function modifier(){
 
-}
-public function supprimer(){
+
+public function affecterModule(){
     
 }
+
 
 
     

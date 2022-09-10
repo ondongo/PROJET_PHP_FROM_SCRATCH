@@ -42,10 +42,10 @@ body{
      color: white;  
 }
 .list-group a{
-   background-color: #294675;
+   background-color: #c06215;
 }
 .list-group a:hover{
-    background-color: #4474C2;
+    background-color: #000103;
     color: white;  
  }
 .wrapper .content{
@@ -63,5 +63,5 @@ body{
 }
 
 .card-header.bg-header{
-   background-color: #E8E9EB!important;
+   background-color: #c06215!important;
 }

@@ -6,17 +6,29 @@ class Etudiant extends User {
     public function __construct()
     {
         parent::__construct();
-        parent::$role="ROLE_Etudiant";
+        parent::$role="ROLE_ETUDIANT";
         $this->adresse=new Adresse;   //objet adresse
     }
     public function adresse():Adresse{
         return new Adresse();
     }
+
+
+
+    public function classe():Classe{
+        return new Classe();
+    }
     public function demandeinscription():array{
         return [];
       }
+
+
+      public function cours():array{
+        return [];
+      }
+      
     public static function selectAll(){
-        $sql="select *  from  ".parent::$table." where role like ? ";
+        $sql="select *  from  ".parent::table()." where role like ? ";
        return parent::database()->executeSelect($sql,[parent::$role]);
      }
 
@@ -25,7 +37,7 @@ class Etudiant extends User {
        $sql="INSERT INTO ? (`login`,`password`, `matricule`, `ville`, `quartier`, `role`,nom_complet)
             VALUES (?,?,?,?,?,?,?);";
        return parent::database()->executeUpdate($sql,[
-                       parent::$table,
+                       parent::table(),
                        $this->login,$this->password,$this->matricule,
                        $this->adresse->getVille(),  $this->adresse->getQuartier(),
                        parent::$role,$this->nomComplet]);

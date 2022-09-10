@@ -1,63 +1,76 @@
 <?php 
 namespace App\Core;
 
+use App\Models\Classe;
 use App\Exceptions\BdConnexionException;
 
-//Classe d'execution des resquetes Database
+
 class DataBase{
-    //Connexion a la BD;
-    // PDO or msqli
+    //Connexion a la BD
     private \PDO|null $pdo=null;//Pas de connexion
     //Mode Deconnecte
+
+    private string $className;
     public function openConnexion(){
         //host : adresse du server BD
-        try{
+        try {
             //Essaie de te connecter
-            $this->pdo=new \PDO("mysql:dbname=scolaire_baila;host=127.0.0.1","root","");
+            $this->pdo=new \PDO("mysql:dbname=scolaire_baila;host=localhost","root","");
         } catch (\Exception $ex) {
               die("Erreur Connexion -Veuillez contacter votre Admin");
               //throw new BdConnexionException;
-            }
+        }
+       
     }
 
-
-
-    //fermeture de la connexion
     public function closeConnexion(){
-         $this->pdo=null;//couper la connexion
+         $this->pdo=null;
     }
-    //gère les requetes de selection
+
     public function executeSelect(string $sql,array $data=[],$single=false){
+       // dd(get_called_class());
       //Requete non preparee  => Pas du Securise
       //Requete dont les variables sont injectees a l'ecriture
        // $id=1;
        // $sql="Select * from classe where id=$id ";
 
       //Requete preparee  => Securise
-        //Requete dont les donnees sont injectees a l'exection de la requete
+        //Requete dont les donnee sont injectees a l'exection de la requete
         //a l'eriture les variables sont remplacees par des joker
         $this->openConnexion();
        // $sql="Select * from classe where id=? and role like ? ";
          $stm=$this->pdo->prepare($sql);
          $stm->execute($data);
+         $stm->setFetchMode(\PDO::FETCH_CLASS,$this->className);
         if($single){
-            $result=$stm->fetch();// retourne one ligne un résultat
+            $result=$stm->fetch();//Both
         }else{
             $result=$stm->fetchAll();
-             //plusieurs lignes plusuieurs résultat
         }
         $this->closeConnexion();
         return  $result;
         
     }
-    //gère les requetes de mise à jour 
+
     public function executeUpdate(string $sql,array $data=[]):int{
         $this->openConnexion();
        // $sql="Select * from classe where id=? and role like ? ";
-         $stm=$this->pdo->prepare($sql);   //objet stm retourne la requete a ecuté il pose des pointeurs
+         $stm=$this->pdo->prepare($sql);
          $stm->execute($data);
-         $result=$stm->rowCount();//nombre de ligne de la requete
+         $result=$stm->rowCount();
         $this->closeConnexion();
         return  $result;
+    }
+
+    /**
+     * Set the value of className
+     *
+     * @return  self
+     */ 
+    public function setClassName($className)
+    {
+        $this->className = $className;
+
+        return $this;
     }
 }
